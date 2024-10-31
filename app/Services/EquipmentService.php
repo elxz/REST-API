@@ -28,7 +28,7 @@ class EquipmentService
             $query->orWhere('description', 'LIKE', "%$description%");
           }
         })
-        ->paginate(perPage: 5)
+        ->paginate(perPage: 6)->appends($request->query())
     );
   }
   function store($data)

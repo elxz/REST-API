@@ -6,7 +6,6 @@
         {{ equipment.equipment_type.name }}
       </VaCardTitle>
       <VaCardContent>Серийный номер: {{ equipment.serial_number }}</VaCardContent>
-      <VaCardContent>Описание: {{ equipment.description }}</VaCardContent>
     </VaCard></Link
   >
 </template>

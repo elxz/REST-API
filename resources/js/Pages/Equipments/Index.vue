@@ -8,14 +8,7 @@
       :equipment="equipment"
     ></EquipmentsItemComponent>
 
-    <VaPagination
-      v-model="equipments.meta.current_page"
-      :pages="equipments.meta.last_page"
-      :visible-pages="5"
-      gapped
-      class="justify-center sm:justify-start"
-    >
-    </VaPagination>
+    <PaginateComponent :links="equipments.meta.links"></PaginateComponent>
 
     <VaModal hideDefaultActions v-model="showModal">
       <FormCreateComponent></FormCreateComponent>
@@ -26,19 +19,13 @@
 <script setup lang="ts">
 import EquipmentsItemComponent from '@/Components/EquipmentsItemComponent.vue'
 import FormCreateComponent from '@/Components/FormCreateComponent.vue'
+import PaginateComponent from '@/Components/PaginateComponent.vue'
 import { ref } from 'vue'
 import IEquipments from '@/Interfaces/IEquipments'
-import { useForm, InertiaForm } from '@inertiajs/vue3'
 
 const showModal = ref<boolean>(false)
 
-const form: InertiaForm<{
-  equipments: object[]
-}> = useForm({
-  equipments: []
-})
-
-const props = defineProps<{
+defineProps<{
   equipments: IEquipments
 }>()
 </script>

@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { useForm, InertiaForm } from '@inertiajs/vue3'
-import useEquipmentTypeStore from '@/Store/EquipmentTypeStore'
+import useEquipmentTypeStore from '@/Stores/EquipmentTypeStore'
 import { ref } from 'vue'
 
 const equipmentTypeStore = useEquipmentTypeStore()

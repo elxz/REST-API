@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import IEquipment from '@/Interfaces/IEquipment'
 import { useForm, InertiaForm } from '@inertiajs/vue3'
-import useEquipmentTypeStore from '@/Store/EquipmentTypeStore'
+import useEquipmentTypeStore from '@/Stores/EquipmentTypeStore'
 
 const props = defineProps<{
   equipment: IEquipment
