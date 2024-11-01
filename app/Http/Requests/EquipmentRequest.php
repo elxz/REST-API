@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\EquipmentCheckSerialNumberArrayRule;
+use App\Rules\EquipmentCheckSerialNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EquipmentRequest extends FormRequest
@@ -23,20 +23,9 @@ class EquipmentRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'equipments' => ['array'],
-      'equipments.*.equipment_type_id' => ['required'],
-      'equipments.*.serial_number' => [
-        'required',
-        new EquipmentCheckSerialNumberArrayRule(equipment_type_ids: $this->input('equipments.*.equipment_type_id')),
-      ],
-      'equipments.*.description' => ['required'],
-    ];
-  }
-
-  public function messages(): array
-  {
-    return [
-      'equipments.*.serial_number.mask' => 'test',
+        'equipment_type_id' => ['required', 'integer'],
+        'description' => ['required'],
+        'serial_number' => ['required', new EquipmentCheckSerialNumberRule(equipment_type_id: $this->input('equipment_type_id'))],
     ];
   }
 }

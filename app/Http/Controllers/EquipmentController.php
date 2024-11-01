@@ -14,35 +14,35 @@ class EquipmentController extends BaseController
 {
   function index(Request $request)
   {
-    $equipments = $this->service->index($request);
+    $equipments = $this->equipmentService->index($request);
 
     return Inertia::render('Equipments/Index', ['equipments' => $equipments]);
   }
 
   function store(EquipmentRequest $request)
   {
-    $this->service->store($request->validated());
+    $this->equipmentService->store($request->validated());
 
     return redirect()->route('api.equipments.index');
   }
 
   function show($id)
   {
-    $equipment = $this->service->show($id);
+    $equipment = $this->equipmentService->show($id);
 
     return Inertia::render('Equipments/Show', ['equipment' => $equipment]);
   }
 
-  function update(EquipmentUpdateRequest $request, $id)
+  function update(EquipmentRequest $request, $id)
   {
-    $this->service->update($request->validated(), $id);
+    $this->equipmentService->update($request->validated(), $id);
 
     return redirect()->route('api.equipments.index');
   }
 
   function destroy($id)
   {
-    $this->service->destroy($id);
+    $this->equipmentService->destroy($id);
 
     return redirect()->route('api.equipments.index');
   }

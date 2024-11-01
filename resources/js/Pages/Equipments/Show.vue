@@ -1,16 +1,11 @@
 <template>
   <div class="p-8">
-    <Link :href="route('api.equipments.index')"><VaButton>На главную</VaButton></Link>
-  </div>
-  <div class="m-8">
-    <h1 class="text-3xl"><span class="underline">Тип</span>{{ equipment.equipment_type.name }}</h1>
-    <h1 class="text-3xl">Серийный номер - {{ equipment.serial_number }}</h1>
-    <h1 class="text-3xl">Описание - {{ equipment.description }}</h1>
+    <Link :href="route('api.equipments.index')"><VaButton>Back</VaButton></Link>
   </div>
   <div class="flex justify-center items-center">
     <div class="flex justify-center flex-col">
       <FormEditComponent :equipment="equipment"></FormEditComponent>
-      <div class="ml-8"><VaButton color="danger" @click="destroy">Удалить элемент</VaButton></div>
+      <div class="ml-8"><VaButton color="danger" @click="destroy">Delete</VaButton></div>
     </div>
   </div>
 </template>

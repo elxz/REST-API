@@ -11,8 +11,6 @@ class EquipmentTypeController extends BaseController
 {
   function index()
   {
-    $types = EquipmentType::all();
-
-    return EquipmentTypeResource::collection($types);
+    return $this->equipmentTypeService->index();
   }
 }

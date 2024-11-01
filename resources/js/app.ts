@@ -7,6 +7,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createVuestic } from 'vuestic-ui'
 import { createPinia } from 'pinia'
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 
 const pinia = createPinia()
@@ -25,6 +26,7 @@ createInertiaApp({
       .use(ZiggyVue)
       .use(pinia)
       .use(vuestic)
+      .use(autoAnimatePlugin)
       .mount(el)
   },
   progress: {

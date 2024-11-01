@@ -31,19 +31,17 @@ class EquipmentService
         ->paginate(perPage: 6)->appends($request->query())
     );
   }
-  function store($data)
+  function store($equipment)
   {
-    foreach ($data['equipments'] as $value) {
-      Equipment::create($value);
-    }
+    Equipment::create($equipment);
   }
   function show($id)
   {
     return new EquipmentResource(Equipment::with(['equipment_type'])->find($id));
   }
-  function update($data, $id)
+  function update($equipment, $id)
   {
-    Equipment::where('id', $id)->update($data);
+    Equipment::where('id', $id)->update($equipment);
   }
   function destroy($id)
   {

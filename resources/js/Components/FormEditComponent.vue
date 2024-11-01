@@ -1,16 +1,34 @@
 <template>
   <VaForm @submit.prevent="submit" class="flex flex-col items-baseline gap-6 p-8">
     <VaSelect
-      label="Тип оборудования"
+      class="w-full"
+      label="Equipment type"
       :options="equipmentTypeStore.types"
       v-model="form.equipment_type_id"
       text-by="name"
       value-by="id"
       searchable
+      required-mark
     ></VaSelect>
-    <VaTextarea label="Серийный номер" v-model="form.serial_number"></VaTextarea>
-    <VaTextarea label="Примечание" v-model="form.description"></VaTextarea>
-    <VaButton :disabled="form.processing" type="submit">Подтвердить изменения</VaButton>
+    <div>{{ form.errors.equipment_type_id }}</div>
+
+    <VaInput
+      class="w-full"
+      label="Serial number"
+      v-model="form.serial_number"
+      required-mark
+    ></VaInput>
+    <div>{{ form.errors.serial_number }}</div>
+
+    <VaTextarea
+      class="w-full"
+      label="Description"
+      v-model="form.description"
+      required-mark
+    ></VaTextarea>
+    <div>{{ form.errors.description }}</div>
+
+    <VaButton :disabled="form.processing" type="submit">Create</VaButton>
   </VaForm>
 </template>
 

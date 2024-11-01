@@ -35,10 +35,10 @@ Route::get('/api/equipments/{id}', [EquipmentController::class, 'show'])
   ->name('api.equipments.show')
   ->where('id', '[0-9]+');
 Route::post('/api/equipments', [EquipmentController::class, 'store'])->name('api.equipments.store');
-Route::put('api/equipments/{id}', [EquipmentController::class, 'update'])->name(
+Route::put('/api/equipments/{id}', [EquipmentController::class, 'update'])->name(
   'api.equipments.update'
 );
-Route::delete('api/equipments/{id}', [EquipmentController::class, 'destroy'])->name(
+Route::delete('/api/equipments/{id}', [EquipmentController::class, 'destroy'])->name(
   'api.equipments.destroy'
 );
 

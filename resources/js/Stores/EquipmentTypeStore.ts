@@ -8,7 +8,7 @@ export const useEquipmentTypeStore = defineStore('equipment_type', () => {
 
   const fetching = async (): Promise<void> => {
     try {
-      const response = await axios.get('/api/equipment-type')
+      const response = await axios.get(route('api.equipment-type.index'))
       types.value = response.data
     } catch (err) {
       alert(err)
@@ -17,11 +17,7 @@ export const useEquipmentTypeStore = defineStore('equipment_type', () => {
 
   onMounted(fetching)
 
-  const getEquipmentType = ($id: number) => {
-    return types.value.find((type) => type.id === $id)
-  }
-
-  return { types, getEquipmentType }
+  return { types }
 })
 
 export default useEquipmentTypeStore

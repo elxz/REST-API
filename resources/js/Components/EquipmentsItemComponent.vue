@@ -5,7 +5,7 @@
         ID:{{ equipment.id }} |
         {{ equipment.equipment_type.name }}
       </VaCardTitle>
-      <VaCardContent>Серийный номер: {{ equipment.serial_number }}</VaCardContent>
+      <VaCardContent>Serial number: {{ equipment.serial_number }}</VaCardContent>
     </VaCard></Link
   >
 </template>

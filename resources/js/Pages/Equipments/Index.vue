@@ -1,14 +1,18 @@
 <template>
   <div class="p-8">
-    <VaButton class="ml-8" @click="showModal = !showModal">Добавить новое оборудование</VaButton>
+    <VaButton class="ml-8" @click="showModal = !showModal">Create new equipment</VaButton>
 
     <EquipmentsItemComponent
+      v-auto-animate
       v-for="equipment in equipments.data"
       :key="equipment.id"
       :equipment="equipment"
     ></EquipmentsItemComponent>
 
-    <PaginateComponent :links="equipments.meta.links"></PaginateComponent>
+    <PaginateComponent
+      v-if="equipments.meta.last_page >= 2"
+      :links="equipments.meta.links"
+    ></PaginateComponent>
 
     <VaModal hideDefaultActions v-model="showModal">
       <FormCreateComponent></FormCreateComponent>

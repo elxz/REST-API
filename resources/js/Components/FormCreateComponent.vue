@@ -2,49 +2,61 @@
   <VaForm @submit.prevent="submit" class="flex flex-col items-baseline gap-6 p-8">
     <VaSelect
       class="w-full"
-      label="Тип оборудования"
+      label="Equipment type"
       :options="equipmentTypeStore.types"
-      v-model="equipment_type_id"
+      v-model="form.equipment_type_id"
       text-by="name"
       value-by="id"
       searchable
+      required-mark
     ></VaSelect>
-    <VaTextarea class="w-full" label="Серийные номера" v-model="serial_number"></VaTextarea>
-    <VaTextarea class="w-full" label="Примечание" v-model="description"></VaTextarea>
-    <VaButton :disabled="form.processing" type="submit">Добавить</VaButton>
+    <div>{{ form.errors.equipment_type_id }}</div>
+
+    <VaInput
+      class="w-full"
+      label="Serial number"
+      v-model="form.serial_number"
+      required-mark
+    ></VaInput>
+    <div>{{ form.errors.serial_number }}</div>
+
+    <VaTextarea
+      class="w-full"
+      label="Description"
+      v-model="form.description"
+      required-mark
+    ></VaTextarea>
+    <div>{{ form.errors.description }}</div>
+
+    <VaButton :disabled="form.processing" type="submit">Create</VaButton>
   </VaForm>
 </template>
 
 <script setup lang="ts">
 import { useForm, InertiaForm } from '@inertiajs/vue3'
 import useEquipmentTypeStore from '@/Stores/EquipmentTypeStore'
-import { ref } from 'vue'
 
 const equipmentTypeStore = useEquipmentTypeStore()
 
-const equipment_type_id = ref<number | null>(null)
-const serial_number = ref<string>('')
-const description = ref<string>('')
-
 const form: InertiaForm<{
-  equipments: object[]
+  equipment_type_id: number | null
+  serial_number: string
+  description: string
 }> = useForm({
-  equipments: []
+  equipment_type_id: null,
+  serial_number: '',
+  description: ''
 })
 
 const submit = async (): Promise<void> => {
-  const data: object[] = []
-  serial_number.value.split('\n').forEach((element) => {
-    data.push({
-      equipment_type_id: equipment_type_id.value,
-      serial_number: element,
-      description: description.value
-    })
-  })
-  form.equipments = data
-
   await form.post(route('api.equipments.store'), {
-    onSuccess: () => form.reset()
+    onSuccess: () => {
+      form.reset()
+      alert('Succsess')
+    },
+    onError: (errors) => {
+      console.log(errors)
+    }
   })
 }
 </script>
