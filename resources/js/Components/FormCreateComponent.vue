@@ -1,5 +1,5 @@
 <template>
-  <VaForm @submit.prevent="submit" class="flex flex-col items-baseline gap-6 p-8">
+  <VaForm @submit.prevent="submit" class="flex flex-col items-baseline gap-6 p-4">
     <VaSelect
       class="w-full"
       label="Equipment type"
@@ -9,8 +9,9 @@
       value-by="id"
       searchable
       required-mark
+      immediate-validation
     ></VaSelect>
-    <div>{{ form.errors.equipment_type_id }}</div>
+    <div class="text-red-600">{{ form.errors.equipment_type_id }}</div>
 
     <VaInput
       class="w-full"
@@ -18,7 +19,7 @@
       v-model="form.serial_number"
       required-mark
     ></VaInput>
-    <div>{{ form.errors.serial_number }}</div>
+    <div class="text-red-600">{{ form.errors.serial_number }}</div>
 
     <VaTextarea
       class="w-full"
@@ -26,7 +27,7 @@
       v-model="form.description"
       required-mark
     ></VaTextarea>
-    <div>{{ form.errors.description }}</div>
+    <div class="text-red-600">{{ form.errors.description }}</div>
 
     <VaButton :disabled="form.processing" type="submit">Create</VaButton>
   </VaForm>
@@ -52,10 +53,7 @@ const submit = async (): Promise<void> => {
   await form.post(route('api.equipments.store'), {
     onSuccess: () => {
       form.reset()
-      alert('Succsess')
-    },
-    onError: (errors) => {
-      console.log(errors)
+      alert('Success')
     }
   })
 }

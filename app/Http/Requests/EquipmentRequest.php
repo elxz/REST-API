@@ -24,8 +24,15 @@ class EquipmentRequest extends FormRequest
   {
     return [
         'equipment_type_id' => ['required', 'integer'],
-        'description' => ['required'],
+        'description' => ['required', 'min:30', 'max:255'],
         'serial_number' => ['required', new EquipmentCheckSerialNumberRule(equipment_type_id: $this->input('equipment_type_id'))],
+    ];
+  }
+
+  public function messages()
+  {
+    return [
+        'equipment_type_id.required' => 'The equipment type field is required'
     ];
   }
 }

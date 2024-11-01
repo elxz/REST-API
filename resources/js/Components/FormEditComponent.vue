@@ -10,7 +10,7 @@
       searchable
       required-mark
     ></VaSelect>
-    <div>{{ form.errors.equipment_type_id }}</div>
+    <div class="text-red-600">{{ form.errors.equipment_type_id }}</div>
 
     <VaInput
       class="w-full"
@@ -18,7 +18,7 @@
       v-model="form.serial_number"
       required-mark
     ></VaInput>
-    <div>{{ form.errors.serial_number }}</div>
+    <div class="text-red-600">{{ form.errors.serial_number }}</div>
 
     <VaTextarea
       class="w-full"
@@ -26,9 +26,9 @@
       v-model="form.description"
       required-mark
     ></VaTextarea>
-    <div>{{ form.errors.description }}</div>
+    <div class="text-red-600">{{ form.errors.description }}</div>
 
-    <VaButton :disabled="form.processing" type="submit">Create</VaButton>
+    <VaButton class="w-24" :disabled="form.processing" type="submit">Edit</VaButton>
   </VaForm>
 </template>
 
@@ -54,7 +54,11 @@ const form: InertiaForm<{
 })
 
 const submit = async (): Promise<void> => {
-  await form.put(route('api.equipments.update', props.equipment.id))
+  await form.put(route('api.equipments.update', props.equipment.id), {
+    onSuccess: () => {
+      alert('Success')
+    }
+  })
 }
 </script>
 

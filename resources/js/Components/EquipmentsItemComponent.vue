@@ -1,11 +1,12 @@
 <template>
   <Link :href="route('api.equipments.show', equipment.id)"
-    ><VaCard class="m-8 hover:brightness-50 hover:transition-all" tag="b">
+    ><VaCard class="m-4 hover:brightness-50 hover:transition-all" tag="b">
       <VaCardTitle>
         ID:{{ equipment.id }} |
         {{ equipment.equipment_type.name }}
       </VaCardTitle>
       <VaCardContent>Serial number: {{ equipment.serial_number }}</VaCardContent>
+      <VaCardContent>Description: {{ equipment.description }}</VaCardContent>
     </VaCard></Link
   >
 </template>

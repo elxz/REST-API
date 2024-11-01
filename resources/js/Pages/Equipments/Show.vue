@@ -3,9 +3,11 @@
     <Link :href="route('api.equipments.index')"><VaButton>Back</VaButton></Link>
   </div>
   <div class="flex justify-center items-center">
-    <div class="flex justify-center flex-col">
+    <div class="flex justify-center flex-col w-1/3">
       <FormEditComponent :equipment="equipment"></FormEditComponent>
-      <div class="ml-8"><VaButton color="danger" @click="destroy">Delete</VaButton></div>
+      <div class="ml-8">
+        <VaButton class="w-24" color="danger" @click="destroy">Delete</VaButton>
+      </div>
     </div>
   </div>
 </template>
@@ -23,7 +25,9 @@ const props = defineProps<{
 const form = useForm({})
 
 const destroy = async () => {
-  await form.delete(route('api.equipments.destroy', props.equipment.id))
+  await form.delete(route('api.equipments.destroy', props.equipment.id), {
+    onSuccess: () => alert('Success')
+  })
 }
 </script>
 

@@ -1,13 +1,7 @@
 import IEquipment from './IEquipment'
 
-export default interface IEquipments {
+export default interface IEquipmentMeta {
   data: IEquipment[]
-  links: {
-    first: string
-    last: string
-    prev: string
-    next: string
-  }
   meta: {
     last_page: number
     current_page: number
