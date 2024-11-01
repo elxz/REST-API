@@ -30,7 +30,7 @@ import { ref } from 'vue'
 import useEquipmentTypeStore from '@/Stores/EquipmentTypeStore'
 import IEquipmentMeta from '@/Interfaces/IEquipmentMeta'
 
-const equipmentTypeStore = useEquipmentTypeStore()
+useEquipmentTypeStore()
 
 const showModal = ref<boolean>(false)
 
