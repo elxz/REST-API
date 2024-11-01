@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EquipmentRequest;
-use App\Http\Requests\EquipmentUpdateRequest;
-use App\Http\Resources\EquipmentResource;
-use App\Models\Equipment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class EquipmentController extends BaseController
 {
   function index(Request $request)
   {
-    $equipments = $this->equipmentService->index($request);
+    $equipments = $this->equipmentService->index(
+      $request->input('equipment_type_id'),
+      $request->input('serial_number'),
+      $request->input('description'),
+      $request->query()
+    );
 
     return Inertia::render('Equipments/Index', ['equipments' => $equipments]);
   }

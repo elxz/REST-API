@@ -7,12 +7,8 @@ use App\Http\Resources\EquipmentResource;
 
 class EquipmentService
 {
-  function index($request)
+  function index($equipment_type_id, $serial_number, $description, $query)
   {
-    $equipment_type_id = $request->input('equipment_type_id') ?? $request->get('q');
-    $serial_number = $request->input('serial_number') ?? $request->get('q');
-    $description = $request->input('description') ?? $request->get('q');
-
     return EquipmentResource::collection(
       Equipment::with(['equipment_type'])
         ->where(function ($query) use ($equipment_type_id, $serial_number, $description) {
@@ -28,12 +24,12 @@ class EquipmentService
             $query->orWhere('description', 'LIKE', "%$description%");
           }
         })
-        ->paginate(perPage: 6)->appends($request->query())
+        ->paginate(perPage: 6)->appends($query)
     );
   }
   function store($equipment)
   {
-    Equipment::create($equipment);
+    Equipment::firstOrCreate(['equipment_type_id' => $equipment['equipment_type_id'], 'serial_number' => $equipment['serial_number']], $equipment);
   }
   function show($id)
   {
@@ -41,7 +37,9 @@ class EquipmentService
   }
   function update($equipment, $id)
   {
-    Equipment::where('id', $id)->update($equipment);
+    if (Equipment::where('equipment_type_id', $equipment['equipment_type_id'])->where('serial_number', $equipment['serial_number'])->count() === 0) {
+        Equipment::where('id', $id)->update($equipment);
+    }
   }
   function destroy($id)
   {
